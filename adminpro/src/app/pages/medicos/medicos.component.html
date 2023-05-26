@@ -1,0 +1,76 @@
+<div class="row animated fadeIn">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+
+        <input #buscador (keyup)="buscarMedicos( buscador.value )" type="text" class="form-control" placeholder="Buscar médico">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="cargando">
+  <div class="col-sm-12">
+    <div class="alert alert-warning text-center">
+      <strong>Cargando</strong>
+      <br>
+      <i class="fa fa-refresh fa-spin fa-2x"></i>
+      <br>
+      <span>Espere por favor...</span>
+    </div>
+  </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="!cargando">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+
+        <div class="row">
+          <div class="col text-right">
+            <button class="btn waves-effect waves-light btn-rounded btn-primary" [routerLink]="['/medico', 'nuevo']">
+              <i class="fa fa-plus"></i>
+              Crear médico
+            </button>
+          </div>
+        </div>
+        <h3 class="card-title">Médicos registrados ( <small>{{ totalRegistros }}</small> )</h3>
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Imagen</th>
+              <th>Médico</th>
+              <th>Hospital</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let medico of medicos">
+              <td class="w70">
+                <img (click)="cambiarImagen( medico._id )" [src]="medico.img | imagen:'medico'" class="img-50 img-circle pointer">
+              </td>
+              <td class="align-middle">{{ medico.nombre }}</td>
+              <td class="align-middle">{{ medico.hospital['nombre'] }}</td>
+              
+              <td class="align-middle">
+                <button class="btn btn-primary mr-1" [routerLink]="['/medico', medico._id]">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button (click)="borrar(medico)" class="btn btn-danger">
+                  <i class="fa fa-trash-o"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+
+        <button (click)="cambiarDesde(-5)" class="btn btn-secondary mr-1">Anteriores</button>
+        <button (click)="cambiarDesde(5)" class="btn btn-secondary">Siguientes</button>
+
+      </div>
+    </div>
+  </div>
+</div>

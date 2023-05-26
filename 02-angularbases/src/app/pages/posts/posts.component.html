@@ -1,0 +1,9 @@
+<h1>Posts</h1>
+
+<ul class="list-group">
+  <!-- <li class="list-group-item" *ngFor="let item of posts | async">
+    <h2>{{ item.title }}</h2>
+    <p>{{ item.body }}</p>
+  </li> -->
+  <app-post *ngFor="let item of posts | async" [item]="item" (clickPost)="retrieveEvent($event)"></app-post>
+</ul>

@@ -1,0 +1,112 @@
+[
+    {
+      "title": "alert",
+      "icon": "american-football",
+      "redirectTo": "/alert"
+    },
+    {
+      "title": "action sheet",
+      "icon": "appstore",
+      "redirectTo": "/action-sheet"
+    },
+    {
+      "title": "avatar",
+      "icon": "beaker",
+      "redirectTo": "/avatar"
+    },
+    {
+      "title": "botones y router",
+      "icon": "radio-button-on",
+      "redirectTo": "/botones"
+    },
+    {
+      "title": "cards",
+      "icon": "card",
+      "redirectTo": "/cards"
+    },
+    {
+      "title": "checkbox",
+      "icon": "checkmark-circle-outline",
+      "redirectTo": "/check"
+    },
+    {
+      "title": "datetime",
+      "icon": "calendar",
+      "redirectTo": "/date-time"
+    },
+    {
+      "title": "Fabs",
+      "icon": "car",
+      "redirectTo": "/fab"
+    },
+    {
+      "title": "Grid - Rows - Cols",
+      "icon": "grid",
+      "redirectTo": "/grid"
+    },
+    {
+      "title": "Infinite Scroll",
+      "icon": "infinite",
+      "redirectTo": "/infinite-scroll"
+    },
+    {
+      "title": "Input - Forms",
+      "icon": "hammer",
+      "redirectTo": "/input"
+    },
+    {
+      "title": "Lists - Item Sliding",
+      "icon": "list",
+      "redirectTo": "/list"
+    },
+    {
+      "title": "Lists - Reorder",
+      "icon": "reorder",
+      "redirectTo": "/list-reorder"
+    },
+    {
+      "title": "Loading",
+      "icon": "refresh-circle",
+      "redirectTo": "/loading"
+    },
+    {
+      "title": "Modal",
+      "icon": "phone-portrait",
+      "redirectTo": "/modal"
+    },
+    {
+      "title": "popover",
+      "icon": "tablet-portrait",
+      "redirectTo": "/popover"
+    },
+    {
+      "title": "progressbar y range",
+      "icon": "code-working",
+      "redirectTo": "/progressbar"
+    },
+    {
+      "title": "refresher",
+      "icon": "arrow-round-down",
+      "redirectTo": "/refresher"
+    },
+    {
+      "title": "searchbar",
+      "icon": "search",
+      "redirectTo": "/searchbar"
+    },
+    {
+      "title": "segment",
+      "icon": "copy",
+      "redirectTo": "/segment"
+    },
+    {
+      "title": "slides",
+      "icon": "albums",
+      "redirectTo": "/slides"
+    },
+    {
+      "title": "tabs",
+      "icon": "cog",
+      "redirectTo": "/tabs/account"
+    }
+  ]

@@ -1,0 +1,70 @@
+<br />
+
+<h1>{{ title }}</h1>
+<hr />
+
+<div class="row animated fadeIn fast" *ngIf="movies.length > 0">
+  <div class="col-sm-6">
+    <div class="row" >
+      <div
+        class="col-md-12 div-pic-1 puntero"
+        [routerLink]="['/movie', movies[0].id, 'home']"
+        [ngStyle]="{
+          'background-image': 'url( ' + (movies[0] | movieImg) + ' )'
+        }">
+        <p class="pic-titulo">{{ movies[0].original_title }}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div
+        class="col-sm-6 div-pic-2 puntero"
+        [routerLink]="['/movie', movies[1].id, 'home']"
+        [ngStyle]="{
+          'background-image': 'url( ' + (movies[1] | movieImg) + ' )'
+        }">
+        <p class="pic-titulo">{{ movies[1].original_title }}</p>
+      </div>
+      <div
+        class="col-sm-6 div-pic-2 puntero"
+        [routerLink]="['/movie', movies[2].id, 'home']"
+        [ngStyle]="{
+          'background-image': 'url( ' + (movies[2] | movieImg) + ' )'
+        }">
+        <p class="pic-titulo">{{ movies[2].original_title }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="row">
+      <div
+        class="col-sm-6 div-pic-2 puntero"
+        [routerLink]="['/movie', movies[3].id, 'home']"
+        [ngStyle]="{
+          'background-image': 'url( ' + (movies[3] | movieImg) + ' )'
+        }">
+        <p class="pic-titulo">{{ movies[3].original_title }}</p>
+      </div>
+      <div
+        class="col-sm-6 div-pic-2 puntero"
+        [routerLink]="['/movie', movies[4].id, 'home']"
+        [ngStyle]="{
+          'background-image': 'url( ' + (movies[4] | movieImg) + ' )'
+        }">
+        <p class="pic-titulo">{{ movies[4].original_title }}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div
+        class="col-md-12 div-pic-1 puntero"
+        [routerLink]="['/movie', movies[5].id, 'home']"
+        [ngStyle]="{
+          'background-image': 'url( ' + (movies[5] | movieImg) + ' )'
+        }">
+        <p class="pic-titulo">{{ movies[5].original_title }}</p>
+      </div>
+    </div>
+  </div>
+</div>

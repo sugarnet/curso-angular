@@ -1,0 +1,9 @@
+<div class="card-columns" *ngIf="imagenes">
+    <div class="card" *ngFor="let item of imagenes">
+        <img [src]="item.url" class="card-img-top">
+        <div class="card-body">
+            <h5 class="card-title">{{ item.nombre }}</h5>
+        </div>
+    </div>
+
+</div>

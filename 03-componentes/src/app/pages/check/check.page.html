@@ -1,0 +1,12 @@
+<app-header title="checkbox"></app-header>
+
+<ion-content class="ion-padding">
+
+  <ion-list>
+    <ion-item *ngFor="let item of items" (click)="onClick(item)">
+      <ion-label>{{item.name}}</ion-label>
+      <ion-checkbox [(ngModel)]="item.selected" [color]="item.name"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
