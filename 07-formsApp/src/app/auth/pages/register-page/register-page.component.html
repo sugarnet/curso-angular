@@ -12,8 +12,8 @@
                 <div class="col-sm-9">
                     <input type="text"
                            class="form-control"
-                           placeholder="Nombre del usuario"
-                           formControlName="name">
+                           formControlName="name"
+                           placeholder="Nombre del usuario">
 
                     <span *ngIf="isValidField('name')" class="form-text text-danger">
                         Debe de ser en formato de nombre y apellido
@@ -27,8 +27,8 @@
                 <div class="col-sm-9">
                     <input type="email"
                            class="form-control"
-                           placeholder="Email del usuario"
-                           formControlName="email">
+                           formControlName="email"
+                           placeholder="Email del usuario">
                     <span *ngIf="isValidField('email')" class="form-text text-danger">
                         mensaje de error del email
                     </span>
@@ -41,8 +41,8 @@
                 <div class="col-sm-9">
                     <input type="text"
                            class="form-control"
-                           placeholder="Nombre código del usuario"
-                           formControlName="username">
+                           formControlName="username"
+                           placeholder="Nombre código del usuario">
                     <span *ngIf="isValidField('username')" class="form-text text-danger">
                          El username no puede ser Strider
                     </span>
@@ -55,8 +55,8 @@
                 <div class="col-sm-9">
                     <input type="password"
                            class="form-control"
-                           placeholder="Password de su cuenta"
-                           formControlName="password">
+                           formControlName="password"
+                           placeholder="Password de su cuenta">
 
                     <span *ngIf="isValidField('password')" class="form-text text-danger">
                          La contraseña debe de ser mayor de 6 caracteres.
@@ -70,8 +70,8 @@
                 <div class="col-sm-9">
                     <input type="password"
                            class="form-control"
-                           placeholder="Confirmar la contraseña"
-                           formControlName="password2">
+                           formControlName="password2"
+                           placeholder="Confirmar la contraseña">
 
                     <span *ngIf="isValidField('password2')" class="form-text text-danger">
                          Las contraseñas deben de ser iguales
