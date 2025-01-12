@@ -4,12 +4,17 @@ import { SelectorPageComponent } from './pages/selector-page/selector-page.compo
 
 const routes: Routes = [
     {
-        path: 'selector',
-        component: SelectorPageComponent
-    },
-    {
-        path: '**',
-        redirectTo: 'selector'
+        path: '',
+        children: [
+            {
+                path: 'selector',
+                component: SelectorPageComponent
+            },
+            {
+                path: '**',
+                redirectTo: 'selector'
+            }
+        ]
     }
 ];
 
