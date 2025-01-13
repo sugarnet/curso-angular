@@ -15,7 +15,7 @@ export class SelectorPageComponent implements OnInit {
 
   private fb = inject(FormBuilder);
   public countriesByRegion: SmallCountry[] = [];
-  public borders: string[] = [];
+  public borders: SmallCountry[] = [];
 
   public myForm: FormGroup = this.fb.group({
     region:  ['', Validators.required],
@@ -54,9 +54,10 @@ export class SelectorPageComponent implements OnInit {
         tap(() => this.myForm.get('border')?.setValue('')),
         filter((code: string) => code.length > 0),
         switchMap(alphaCode => this.countriesService.getCountryByAlphaCode(alphaCode)),
+        switchMap(country => this.countriesService.getCountriesBordersByCode(country.borders)),
       )
-      .subscribe(country => {
-        this.borders = country.borders;
+      .subscribe(countries => {
+        this.borders = countries;
       });
   }
 
