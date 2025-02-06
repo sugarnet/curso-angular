@@ -20,5 +20,9 @@ export class FullScreenPageComponent implements AfterViewInit {
       center: [-74.5, 40], // starting position [lng, lat]
       zoom: 9, // starting zoom
     });
+
+    map.on('load', (event) => {
+      map.resize()
+    });
   }
 }
