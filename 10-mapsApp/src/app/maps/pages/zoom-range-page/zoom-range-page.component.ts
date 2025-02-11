@@ -25,20 +25,21 @@ export class ZoomRangePageComponent implements AfterViewInit, OnDestroy {
       zoom: this.zoom, // starting zoom
     });
 
-    this.map.on('load', (event) => {
-      this.map!.resize()
-    });
-
+    
     this.mapListeners();
   }
-
+  
   ngOnDestroy(): void {
     this.map?.remove();
   }
-
+  
   mapListeners() {
     if (!this.map) throw 'Mapa no inicializado';
-
+    
+    this.map.on('load', (event) => {
+      this.map!.resize()
+    });
+    
     this.map.on('zoom', (ev) => {
       this.zoom = this.map!.getZoom();
     });

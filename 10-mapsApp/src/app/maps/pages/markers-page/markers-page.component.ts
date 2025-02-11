@@ -35,11 +35,10 @@ export class MarkersPageComponent implements AfterViewInit {
       zoom: this.zoom, // starting zoom
     });
 
-    this.map.on('load', (event) => {
-      this.map!.resize()
-    });
+    this.mapListeners();
 
     this.readFromLocalStorage();
+
 
     // const markerHtml = document.createElement('div');
     // markerHtml.innerHTML = 'Diego Scifo';
@@ -51,26 +50,38 @@ export class MarkersPageComponent implements AfterViewInit {
 
   }
 
+  mapListeners() {
+    if (!this.map) throw 'Mapa no inicializado';
+    
+    this.map.on('load', () => {
+      this.map!.resize()
+    });
+
+  }
+  
   createMarker() {
     if (!this.map) return;
 
     const color = '#xxxxxx'.replace(/x/g, y=>(Math.random()*16|0).toString(16));
     const lngLat = this.map.getCenter();
-
+    
     this.addMarker(lngLat, color);
   }
-
+  
   addMarker(lngLat: LngLat, color: string) {
-
+    
     if (!this.map) return;
-
+    
     const marker = new Marker({
       color: color,
       draggable: true,
     }).setLngLat(lngLat).addTo(this.map);
-
+    
     this.markers.push({color, marker});
-    this.saveToLocalStorage();
+    
+    marker.on('dragend', () => {
+      this.saveToLocalStorage();
+    });
   }
 
   deleteMarker(index: number) {
