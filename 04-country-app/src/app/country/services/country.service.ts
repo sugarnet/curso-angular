@@ -30,4 +30,19 @@ export class CountryService {
         })
       );
   }
+  searchByCountry(query: string): Observable<Country[]> {
+    const queryToLowerCase = query.toLowerCase();
+
+    return this.http.get<RESTCountry[]>(`${URL}/name/${queryToLowerCase}`).pipe(
+      map((resp) => {
+        return CountryMapper.mapRestCountryItemsToCountryArray(resp);
+      }),
+      catchError((err) => {
+        console.log('Error: ', err);
+        return throwError(
+          () => new Error(`No se obtuvieron paises con el el valor: ${query}`)
+        );
+      })
+    );
+  }
 }
