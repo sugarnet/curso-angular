@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { catchError, delay, map, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
+import { Country } from '../interfaces/country.interface';
 import { RESTCountry } from '../interfaces/rest-country.interface';
 import { CountryMapper } from '../mappers/country.mapper';
-import { Country } from '../interfaces/country.interface';
 
 const URL = 'https://restcountries.com/v3.1';
 
@@ -25,7 +25,7 @@ export class CountryService {
         catchError((err) => {
           console.log('Error: ', err);
           return throwError(
-            () => new Error(`No se obtuvieron paises con el valor: ${query}`)
+            () => new Error(`No se obtuvieron capitales con el valor: ${query}`)
           );
         })
       );
@@ -40,7 +40,7 @@ export class CountryService {
       catchError((err) => {
         console.log('Error: ', err);
         return throwError(
-          () => new Error(`No se obtuvieron paises con el valor: ${query}`)
+          () => new Error(`No se obtuvieron países con el valor: ${query}`)
         );
       })
     );
@@ -54,7 +54,7 @@ export class CountryService {
       catchError((err) => {
         console.log('Error: ', err);
         return throwError(
-          () => new Error(`No se obtuvieron paises con el valor: ${code}`)
+          () => new Error(`No se obtuvieron países con el valor: ${code}`)
         );
       })
     );

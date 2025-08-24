@@ -2,15 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  resource,
   signal,
 } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { of } from 'rxjs';
 import { CountryListComponent } from '../../components/country-list/country-list.component';
 import { CountrySearchInputComponent } from '../../components/country-search-input/country-search-input.component';
-import { Country } from '../../interfaces/country.interface';
 import { CountryService } from '../../services/country.service';
-import { firstValueFrom, of } from 'rxjs';
-import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-by-capital-page',

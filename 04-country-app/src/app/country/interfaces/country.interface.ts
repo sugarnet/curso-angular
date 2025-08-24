@@ -5,4 +5,13 @@ export interface Country {
   name: string;
   capital: string;
   population: number;
+  region: string;
+  subRegion: string;
+  currencies: Record<string, Currency>;
+  languages: Record<string, string>;
+}
+
+export interface Currency {
+  symbol: string;
+  name: string;
 }
