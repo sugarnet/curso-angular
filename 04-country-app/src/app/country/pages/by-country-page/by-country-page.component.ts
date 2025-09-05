@@ -2,14 +2,15 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  resource,
+  linkedSignal,
   signal,
 } from '@angular/core';
-import { CountrySearchInputComponent } from '../../components/country-search-input/country-search-input.component';
-import { CountryListComponent } from '../../components/country-list/country-list.component';
-import { CountryService } from '../../services/country.service';
-import { firstValueFrom, of } from 'rxjs';
 import { rxResource } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, Router } from '@angular/router';
+import { of } from 'rxjs';
+import { CountryListComponent } from '../../components/country-list/country-list.component';
+import { CountrySearchInputComponent } from '../../components/country-search-input/country-search-input.component';
+import { CountryService } from '../../services/country.service';
 
 @Component({
   selector: 'app-by-country-page',
@@ -19,13 +20,23 @@ import { rxResource } from '@angular/core/rxjs-interop';
 })
 export class ByCountryPageComponent {
   countryService = inject(CountryService);
-  query = signal<string>('');
+  activatedRoute = inject(ActivatedRoute);
+  router = inject(Router);
+
+  queryParam = this.activatedRoute.snapshot.queryParamMap.get('query') ?? '';
+
+  // uso linkedSignal cuando una signal necesita ser inicializada.
+  query = linkedSignal<string>(() => this.queryParam);
 
   // https://angular.dev/api/core/rxjs-interop/rxResource
   countryResourse = rxResource({
     params: () => ({ query: this.query() }),
     stream: ({ params }) => {
       if (!params.query) return of([]);
+
+      this.router.navigate(['/country/by-country'], {
+        queryParams: { query: params.query },
+      });
 
       return this.countryService.searchByCountry(params.query);
     },
