@@ -38,6 +38,8 @@ export class FormUtils {
           return `Mínimo de ${errors['minlength'].requiredLength} caracteres.`;
         case 'min':
           return `Valor mínimo: ${errors['min'].min}.`;
+        case 'email':
+          return `El email es inválido.`;
       }
     }
 

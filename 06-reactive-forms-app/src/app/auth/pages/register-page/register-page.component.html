@@ -17,7 +17,7 @@
 
           @if (formUtils.isValidField(myForm, 'name')) {
           <span class="form-text text-danger">
-            Debe de ser en formato de nombre y apellido
+            {{ formUtils.getFieldError(myForm, "name") }}
           </span>
           }
         </div>
@@ -33,9 +33,11 @@
             placeholder="Email del usuario"
             formControlName="email"
           />
+          @if (formUtils.isValidField(myForm, 'email')) {
           <span class="form-text text-danger">
-            mensaje de error del email
+            {{ formUtils.getFieldError(myForm, "email") }}
           </span>
+          }
         </div>
       </div>
 
@@ -49,9 +51,11 @@
             placeholder="Nombre código del usuario"
             formControlName="username"
           />
+          @if (formUtils.isValidField(myForm, 'username')) {
           <span class="form-text text-danger">
-            El username no puede ser Strider
+            {{ formUtils.getFieldError(myForm, "username") }}
           </span>
+          }
         </div>
       </div>
 
@@ -66,9 +70,11 @@
             formControlName="password1"
           />
 
+          @if (formUtils.isValidField(myForm, 'password1')) {
           <span class="form-text text-danger">
-            La contraseña debe de ser mayor de 6 caracteres.
+            {{ formUtils.getFieldError(myForm, "password1") }}
           </span>
+          }
         </div>
       </div>
 
@@ -83,9 +89,11 @@
             formControlName="password2"
           />
 
+          @if (formUtils.isValidField(myForm, 'password2')) {
           <span class="form-text text-danger">
-            Las contraseñas deben de ser iguales
+            {{ formUtils.getFieldError(myForm, "password2") }}
           </span>
+          }
         </div>
       </div>
 
@@ -98,14 +106,12 @@
   </div>
 </div>
 
-<h2>Form Valid:</h2>
-<pre>{{ myForm.valid | json }}</pre>
+<h2>Form Valid: {{ myForm.valid }}</h2>
+<h2>Form Status: {{ myForm.status }}</h2>
+<h2>Form Pending: {{ myForm.pending }}</h2>
 
-<h2>Form Status:</h2>
-<pre>{{ myForm.status | json }}</pre>
-
-<h2>Form Pending:</h2>
-<pre>{{ myForm.pending | json }}</pre>
+<h2>Form Value</h2>
+<pre>{{ myForm.value | json }}</pre>
 
 <h2>Form errors</h2>
 <pre>{{ myForm.errors | json }}</pre>
