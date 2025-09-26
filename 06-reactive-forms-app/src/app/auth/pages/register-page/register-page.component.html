@@ -11,7 +11,7 @@
           <input
             type="text"
             class="form-control"
-            placeholder="Nombre del usuario"
+            placeholder="Nombre y Apellido del usuario"
             formControlName="name"
           />
 
@@ -99,6 +99,9 @@
 
       <div class="row">
         <div class="col">
+          @if (myForm.errors && myForm.touched) {
+          <span class="text-danger">Las contaseñas deben ser iguales</span>
+          }
           <button class="btn btn-primary float-end" type="submit">Crear</button>
         </div>
       </div>
