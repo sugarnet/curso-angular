@@ -1,8 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ProductCardComponent } from '@products/components/product-card/product-card.component';
+import { ProductsService } from '@products/services/products.service';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-home-page',
-  imports: [],
+  imports: [ProductCardComponent],
   templateUrl: './home-page.component.html',
 })
-export class HomePageComponent { }
+export class HomePageComponent {
+  productsService = inject(ProductsService);
+
+  productsResource = rxResource({
+    params: () => ({}),
+    stream: ({ params }) => {
+      return this.productsService.getProducts({});
+    },
+  });
+}
