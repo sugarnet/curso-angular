@@ -18,7 +18,7 @@ export class LoginPageComponent {
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.minLength(6)]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
   onSubmit() {
@@ -32,14 +32,22 @@ export class LoginPageComponent {
 
     const { email = '', password = '' } = this.loginForm.value;
 
-    console.log({ email, password });
-
     this.authService.login(email!, password!).subscribe((isAuthenticated) => {
       if (isAuthenticated) {
         this.router.navigateByUrl('/');
         return;
       }
+
       this.hasError.set(true);
+      setTimeout(() => {
+        this.hasError.set(false);
+      }, 2000);
     });
   }
+
+  // Check Authentication
+
+  // Registro
+
+  // Logout
 }

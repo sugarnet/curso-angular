@@ -5,5 +5,5 @@
 }
 <!--  -->
 @if (productResource.hasValue()) {
-<product-details [product]="productResource.value()"></product-details>
+<product-details [product]="productResource.value()!"></product-details>
 }

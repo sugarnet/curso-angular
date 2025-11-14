@@ -16,7 +16,6 @@
       formControlName="title"
       [class.border-red-500]="myForm.get('title')?.errors ?? false"
     />
-
     <form-error-label [control]="myForm.get('title')!" />
 
     <input
@@ -35,6 +34,7 @@
       formControlName="description"
       [class.border-red-500]="myForm.get('description')?.errors ?? false"
     ></textarea>
+
     <form-error-label [control]="myForm.get('description')!" />
 
     <h2 class="text-lg font-bold">Datos de venta</h2>
@@ -50,6 +50,7 @@
         />
         <form-error-label [control]="myForm.get('price')!" />
       </div>
+
       <div>
         <input
           type="number"
@@ -99,6 +100,7 @@
       >
         Kid
       </button>
+
       <button
         type="button"
         class="btn btn-sm"
@@ -145,3 +147,10 @@
     <input type="file" class="file-input file-input-bordered w-full mt-4" />
   </div>
 </form>
+
+@if (wasSaved()) {
+<div class="alert alert-success fixed bottom-4 right-4 w-80 animate-fadeIn">
+  <span>Datos actualizados correctamente</span>
+</div>
+
+}

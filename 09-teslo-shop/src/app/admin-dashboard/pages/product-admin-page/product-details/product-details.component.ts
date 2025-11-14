@@ -1,10 +1,12 @@
-import { Component, inject, input, OnInit } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { Product } from '@products/interfaces/product.interface';
 import { ProductCarouselComponent } from '@products/components/product-carousel/product-carousel.component';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormUtils } from '@utils/form-utils';
 import { FormErrorLabelComponent } from '@shared/components/form-error-label/form-error-label.component';
 import { ProductsService } from '@products/services/products.service';
+import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'product-details',
@@ -17,8 +19,12 @@ import { ProductsService } from '@products/services/products.service';
 })
 export class ProductDetailsComponent implements OnInit {
   product = input.required<Product>();
+
   fb = inject(FormBuilder);
+  router = inject(Router);
+
   productService = inject(ProductsService);
+  wasSaved = signal(false);
 
   myForm = this.fb.group({
     title: ['', Validators.required],
@@ -62,7 +68,7 @@ export class ProductDetailsComponent implements OnInit {
     this.myForm.patchValue({ sizes: currentSizes });
   }
 
-  onSubmit() {
+  async onSubmit() {
     const isValid = this.myForm.valid;
     this.myForm.markAllAsTouched();
 
@@ -78,8 +84,22 @@ export class ProductDetailsComponent implements OnInit {
           .map((t) => t.trim()) ?? [],
     };
 
-    console.log(productLike);
+    if (this.product().id === 'new') {
+      // Crear producto
+      const product = await firstValueFrom(
+        this.productService.createProduct(productLike)
+      );
 
-    this.productService.updateProduct(productLike);
+      this.router.navigate(['/admin/products', product.id]);
+    } else {
+      await firstValueFrom(
+        this.productService.updateProduct(this.product().id, productLike)
+      );
+    }
+
+    this.wasSaved.set(true);
+    setTimeout(() => {
+      this.wasSaved.set(false);
+    }, 3000);
   }
 }

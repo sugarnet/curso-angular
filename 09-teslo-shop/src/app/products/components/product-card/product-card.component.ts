@@ -1,5 +1,5 @@
 import { SlicePipe } from '@angular/common';
-import { Component, input, OnInit } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Product } from '@products/interfaces/product.interface';
 import { ProductImagePipe } from '@products/pipes/product-image.pipe';
@@ -13,4 +13,10 @@ const BASE_URL = environment.baseUrl;
 })
 export class ProductCardComponent {
   product = input.required<Product>();
+
+  imageUrl = computed(() => {
+    return `http://localhost:3000/api/files/product/${
+      this.product().images[0]
+    }`;
+  });
 }

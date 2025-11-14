@@ -17,6 +17,7 @@
     <tbody>
       <!-- row 1 -->
       @for (product of products(); track product.id) {
+
       <tr>
         <th>
           <label>
@@ -39,6 +40,7 @@
                 class="font-bold hover:text-accent transition-colors duration-300"
                 >{{ product.title }}</a
               >
+
               <div class="text-sm opacity-50">
                 {{ product.sizes.join(", ") }}
               </div>

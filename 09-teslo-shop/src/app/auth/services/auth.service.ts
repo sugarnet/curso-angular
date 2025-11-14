@@ -22,7 +22,7 @@ export class AuthService {
   checkStatusResource = rxResource({ stream: () => this.checkStatus() });
 
   authStatus = computed<AuthStatus>(() => {
-    if (this._authStatus() == 'checking') return 'checking';
+    if (this._authStatus() === 'checking') return 'checking';
 
     if (this._user()) {
       return 'authenticated';

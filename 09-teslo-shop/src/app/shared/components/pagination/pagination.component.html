@@ -5,7 +5,7 @@
     type="radio"
     name="options"
     [aria-label]="page"
-    [checked]="page == activePage()"
+    [checked]="page === activePage()"
     [routerLink]="[]"
     [queryParams]="{ page: page }"
     (click)="activePage.set(page)"

@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { User } from '@auth/interfaces/user.interface';
 import {
+  Gender,
   Product,
   ProductsResponse,
 } from '@products/interfaces/product.interface';
@@ -14,6 +16,20 @@ interface Options {
   offset?: number;
   gender?: string;
 }
+
+const emptyProduct: Product = {
+  id: 'new',
+  title: '',
+  price: 0,
+  description: '',
+  slug: '',
+  stock: 0,
+  sizes: [],
+  gender: Gender.Men,
+  tags: [],
+  images: [],
+  user: {} as User,
+};
 
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
@@ -50,6 +66,10 @@ export class ProductsService {
   }
 
   getProductById(id: string): Observable<Product> {
+    if (id === 'new') {
+      return of(emptyProduct);
+    }
+
     if (this.productCache.has(id)) {
       return of(this.productCache.get(id)!);
     }
@@ -59,7 +79,32 @@ export class ProductsService {
       .pipe(tap((resp) => this.productCache.set(id, resp)));
   }
 
-  updateProduct(productLike: Partial<Product>) {
-    console.log('Actualizando producto');
+  updateProduct(
+    id: string,
+    productLike: Partial<Product>
+  ): Observable<Product> {
+    return this.http
+      .patch<Product>(`${BASE_URL}/products/${id}`, productLike)
+      .pipe(tap((product) => this.updateProductCache(product)));
+  }
+
+  createProduct(productLike: Partial<Product>): Observable<Product> {
+    return this.http
+      .post<Product>(`${BASE_URL}/products`, productLike)
+      .pipe(tap((product) => this.updateProductCache(product)));
+  }
+
+  updateProductCache(product: Product) {
+    const productId = product.id;
+
+    this.productCache.set(productId, product);
+
+    this.productsCache.forEach((productResponse) => {
+      productResponse.products = productResponse.products.map(
+        (currentProduct) => {
+          return currentProduct.id === productId ? product : currentProduct;
+        }
+      );
+    });
   }
 }
