@@ -79,7 +79,7 @@
       <button
         type="button"
         class="btn btn-sm"
-        [class.btn-primary]="myForm.value.gender == 'men'"
+        [class.btn-primary]="myForm.value.gender === 'men'"
         (click)="myForm.patchValue({ gender: 'men' })"
       >
         Masculino
@@ -87,7 +87,7 @@
       <button
         type="button"
         class="btn btn-sm"
-        [class.btn-accent]="myForm.value.gender == 'women'"
+        [class.btn-accent]="myForm.value.gender === 'women'"
         (click)="myForm.patchValue({ gender: 'women' })"
       >
         Femenino
@@ -95,7 +95,7 @@
       <button
         type="button"
         class="btn btn-sm"
-        [class.btn-warning]="myForm.value.gender == 'kid'"
+        [class.btn-warning]="myForm.value.gender === 'kid'"
         (click)="myForm.patchValue({ gender: 'kid' })"
       >
         Kid
@@ -104,7 +104,7 @@
       <button
         type="button"
         class="btn btn-sm"
-        [class.btn-secondary]="myForm.value.gender == 'unisex'"
+        [class.btn-secondary]="myForm.value.gender === 'unisex'"
         (click)="myForm.patchValue({ gender: 'unisex' })"
       >
         Unisex
@@ -142,9 +142,25 @@
       </button>
     </div>
 
-    <product-carousel [images]="product().images" />
+    <product-carousel [images]="imagesToCarousel()" />
 
-    <input type="file" class="file-input file-input-bordered w-full mt-4" />
+    <input
+      type="file"
+      multiple
+      accept="image/*"
+      class="file-input file-input-bordered w-full mt-4"
+      (change)="onFilesChage($event)"
+    />
+
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-2">
+      @for (image of tempImages(); track image) {
+      <img
+        [src]="image"
+        alt="Temporal Image"
+        class="w-full object-cover rounded-xl"
+      />
+      }
+    </div>
   </div>
 </form>
 
