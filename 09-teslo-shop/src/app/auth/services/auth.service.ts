@@ -32,7 +32,7 @@ export class AuthService {
   });
 
   user = computed(() => this._user());
-  token = computed(() => this._token());
+  token = computed(this._token);
   isAdmin = computed(() => this._user()?.roles.includes('admin') ?? false);
 
   login(email: string, password: string): Observable<boolean> {
@@ -60,13 +60,14 @@ export class AuthService {
       })
       .pipe(
         map((resp) => this.handleAuthSuccess(resp)),
-        catchError((error) => this.handleAuthError(error))
+        catchError((error: any) => this.handleAuthError(error))
       );
   }
 
   checkStatus(): Observable<boolean> {
     const token = localStorage.getItem('token');
     if (!token) {
+      this.logout();
       return of(false);
     }
 
@@ -74,7 +75,7 @@ export class AuthService {
       .get<AuthResponse>(`${BASE_URL}/auth/check-status`, {})
       .pipe(
         map((resp) => this.handleAuthSuccess(resp)),
-        catchError((error) => this.handleAuthError(error))
+        catchError((error: any) => this.handleAuthError(error))
       );
   }
 
