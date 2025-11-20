@@ -6,7 +6,7 @@ import {
   Product,
   ProductsResponse,
 } from '@products/interfaces/product.interface';
-import { forkJoin, map, Observable, of, tap } from 'rxjs';
+import { forkJoin, map, Observable, of, switchMap, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 const BASE_URL = environment.baseUrl;
@@ -81,17 +81,38 @@ export class ProductsService {
 
   updateProduct(
     id: string,
-    productLike: Partial<Product>
+    productLike: Partial<Product>,
+    imageFileList?: FileList
   ): Observable<Product> {
-    return this.http
-      .patch<Product>(`${BASE_URL}/products/${id}`, productLike)
-      .pipe(tap((product) => this.updateProductCache(product)));
+    const currentImages = productLike.images ?? [];
+
+    return this.uploadImages(imageFileList).pipe(
+      map((imagesNames) => ({
+        ...productLike,
+        images: [...currentImages, ...imagesNames],
+      })),
+      switchMap((updatedProduct) =>
+        this.http.patch<Product>(`${BASE_URL}/products/${id}`, productLike)
+      ),
+      tap((product) => this.updateProductCache(product))
+    );
   }
 
-  createProduct(productLike: Partial<Product>): Observable<Product> {
-    return this.http
-      .post<Product>(`${BASE_URL}/products`, productLike)
-      .pipe(tap((product) => this.updateProductCache(product)));
+  createProduct(
+    productLike: Partial<Product>,
+    imageFileList?: FileList
+  ): Observable<Product> {
+    const currentImages = productLike.images ?? [];
+    return this.uploadImages(imageFileList).pipe(
+      map((imagesNames) => ({
+        ...productLike,
+        images: [...currentImages, ...imagesNames],
+      })),
+      switchMap((product) =>
+        this.http.post<Product>(`${BASE_URL}/products`, productLike)
+      ),
+      tap((product) => this.updateProductCache(product))
+    );
   }
 
   updateProductCache(product: Product) {
@@ -127,7 +148,7 @@ export class ProductsService {
     formData.append('file', imageFile);
 
     return this.http
-      .post<{ fileName: string }>(`${BASE_URL}/api/product`, formData)
+      .post<{ fileName: string }>(`${BASE_URL}/files/product`, formData)
       .pipe(map((resp) => resp.fileName));
   }
 }
