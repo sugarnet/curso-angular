@@ -92,7 +92,7 @@ export class ProductsService {
         images: [...currentImages, ...imagesNames],
       })),
       switchMap((updatedProduct) =>
-        this.http.patch<Product>(`${BASE_URL}/products/${id}`, productLike)
+        this.http.patch<Product>(`${BASE_URL}/products/${id}`, updatedProduct)
       ),
       tap((product) => this.updateProductCache(product))
     );
@@ -109,7 +109,7 @@ export class ProductsService {
         images: [...currentImages, ...imagesNames],
       })),
       switchMap((product) =>
-        this.http.post<Product>(`${BASE_URL}/products`, productLike)
+        this.http.post<Product>(`${BASE_URL}/products`, product)
       ),
       tap((product) => this.updateProductCache(product))
     );
@@ -130,9 +130,7 @@ export class ProductsService {
   }
 
   uploadImages(images?: FileList): Observable<string[]> {
-    if (!images) {
-      return of([]);
-    }
+    if (!images) return of([]);
 
     const uploadObservables = Array.from(images).map((imageFile) =>
       this.uploadImage(imageFile)
