@@ -13,12 +13,14 @@ import {
 } from '@angular/common/http';
 import { loggingInterceptor } from '@shared/interceptors/logging.interceptor';
 import { authInterceptor } from '@auth/interceptors/auth.interceptor';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
-    provideRouter(routes, withHashLocation()),
+    provideRouter(routes),
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
     provideHttpClient(
       withFetch(),
       withInterceptors([
