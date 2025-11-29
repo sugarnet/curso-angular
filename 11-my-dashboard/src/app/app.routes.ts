@@ -38,12 +38,12 @@ export const routes: Routes = [
       },
       {
         path: 'view-transition1',
-        title: 'View Transition',
+        title: 'View Transition 1',
         loadComponent: () => import('./dashboard/pages/view-transition/view-transition1.component'),
       },
       {
         path: 'view-transition2',
-        title: 'View Transition',
+        title: 'View Transition 2',
         loadComponent: () => import('./dashboard/pages/view-transition/view-transition2.component'),
       },
       {
