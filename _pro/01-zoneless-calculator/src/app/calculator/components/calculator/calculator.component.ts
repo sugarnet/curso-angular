@@ -1,12 +1,11 @@
-import { ChangeDetectionStrategy, Component, computed, inject, viewChildren } from '@angular/core';
-import { CalculatorButtonComponent } from '../calculator-button/calculator-button.component';
 import { CalculatorService } from '@/calculator/services/calculator.service';
+import { Component, computed, inject, viewChildren } from '@angular/core';
+import { CalculatorButtonComponent } from '../calculator-button/calculator-button.component';
 
 @Component({
   selector: 'calculator',
   imports: [CalculatorButtonComponent],
   templateUrl: './calculator.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   styles: `
     /*@reference "tailwindcss";
     .is-command {

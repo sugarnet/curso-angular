@@ -17,7 +17,6 @@ import {
   imports: [],
   templateUrl: './calculator-button.component.html',
   styleUrl: './calculator-button.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'border-r border-b border-indigo-400',
     '[class.w-2/4]': 'isDoubleSize()',
@@ -35,13 +34,11 @@ export class CalculatorButtonComponent {
   public contentValue = viewChild<ElementRef<HTMLButtonElement>>('button');
 
   public isCommand = input(false, {
-    transform: (value: boolean | string) =>
-      typeof value === 'string' ? value === '' : value,
+    transform: (value: boolean | string) => (typeof value === 'string' ? value === '' : value),
   });
 
   public isDoubleSize = input(false, {
-    transform: (value: boolean | string) =>
-      typeof value === 'string' ? value === '' : value,
+    transform: (value: boolean | string) => (typeof value === 'string' ? value === '' : value),
   });
 
   // @HostBinding('class.is-command') get commandStyle() {
