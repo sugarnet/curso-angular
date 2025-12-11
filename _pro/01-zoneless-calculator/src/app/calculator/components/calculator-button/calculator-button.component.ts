@@ -35,16 +35,15 @@ export class CalculatorButtonComponent {
   public contentValue = viewChild<ElementRef<HTMLButtonElement>>('button');
 
   public isCommand = input(false, {
-    transform: this.booleanTransform(),
+    transform: (value: boolean | string) =>
+      typeof value === 'string' ? value === '' : value,
   });
 
   public isDoubleSize = input(false, {
-    transform: this.booleanTransform(),
+    transform: (value: boolean | string) =>
+      typeof value === 'string' ? value === '' : value,
   });
 
-  private booleanTransform(): (value: string | boolean) => boolean {
-    return (value: boolean | string) => (typeof value === 'string' ? value === '' : value);
-  }
   // @HostBinding('class.is-command') get commandStyle() {
   //   return this.isCommand();
   // }
@@ -54,11 +53,13 @@ export class CalculatorButtonComponent {
   // }
 
   handleClick() {
+    console.log('handleClick');
     if (!this.contentValue()?.nativeElement) {
       return;
     }
 
     const value = this.contentValue()!.nativeElement.innerText;
+
     this.onClick.emit(value.trim());
   }
 

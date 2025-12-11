@@ -26,7 +26,8 @@ export class CalculatorComponent {
   public lastOperator = computed(() => this.calculatorService.lastOperator());
 
   handleClick(key: string) {
-    console.log({ key });
+    // console.log({ key });
+    this.calculatorService.constructNumber(key);
   }
 
   //@HostListener('document:keyup', ['$event'])
@@ -34,10 +35,9 @@ export class CalculatorComponent {
     const keyEquivalents: Record<string, string> = {
       Escape: 'C',
       Clear: 'C',
-      '*': 'x',
+      X: '*',
       '/': '÷',
       Enter: '=',
-      c: 'C',
     };
 
     const key = event.key;
