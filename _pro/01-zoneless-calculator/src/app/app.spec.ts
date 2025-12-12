@@ -28,4 +28,45 @@ describe('App', () => {
     // Assert
     expect(result).toBe(4);
   });
+
+  it('should render router-outlet', () => {
+    const fixture = TestBed.createComponent(App);
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    const routerOutlet = compiled.querySelector('router-outlet');
+
+    expect(routerOutlet).toBeTruthy();
+  });
+  it('should render router-outlet with css classes', () => {
+    const fixture = TestBed.createComponent(App);
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    const divElement = compiled.querySelector('div');
+    const mostHaveClasses =
+      'min-w-screen min-h-screen bg-slate-600 flex items-center justify-center px-5 py-5'.split(
+        ' '
+      );
+
+    divElement?.classList.forEach((className) => {
+      expect(mostHaveClasses).toContain(className);
+    });
+  });
+  it('should render buy me a beer link', () => {
+    const fixture = TestBed.createComponent(App);
+    const compiled = fixture.nativeElement as HTMLElement;
+    const linkElement = compiled.querySelector('a');
+
+    expect(linkElement).toBeTruthy();
+
+    const title = 'Buy me a beer';
+    const href = 'https://www.buymeacoffee.com/scottwindon';
+    const target = '_blank';
+
+    //getAttribute
+    expect(linkElement?.getAttribute('title')).toBe(title);
+    expect(linkElement?.getAttribute('href')).toBe(href);
+    expect(linkElement?.getAttribute('target')).toBe(target);
+
+    //
+  });
 });
