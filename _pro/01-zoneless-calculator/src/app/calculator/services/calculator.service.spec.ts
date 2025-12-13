@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { vi } from 'vitest';
 import { CalculatorService } from './calculator.service';
 
 describe('CalculatorService', () => {
@@ -7,6 +8,8 @@ describe('CalculatorService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(CalculatorService);
+
+    vi.resetAllMocks();
   });
   it('should be created', () => {
     expect(service).toBeTruthy();
@@ -140,20 +143,32 @@ describe('CalculatorService', () => {
   });
 
   it('should handle max length', () => {
+    const consoleSpy = vi.spyOn(console, 'log');
+    consoleSpy.mockImplementation(() => {});
+
     for (let index = 1; index <= 20; index++) {
       service.constructNumber('1');
     }
 
     expect(service.resultText()).toBe('1111111111');
+
+    expect(consoleSpy).toHaveBeenCalled();
+    expect(consoleSpy).toHaveBeenCalledTimes(10);
   });
 
   it('should handle invalid input', () => {
+    const consoleSpy = vi.spyOn(console, 'log');
+
     service.constructNumber('1');
     service.constructNumber('2');
     service.constructNumber('!');
     service.constructNumber('$');
 
     expect(service.resultText()).toBe('12');
+
+    expect(consoleSpy).toHaveBeenCalled();
+    expect(consoleSpy).toHaveBeenCalledWith('Invalid input', '!');
+    expect(consoleSpy).toHaveBeenCalledWith('Invalid input', '$');
   });
 
   it('should handle negative zero input correctly', () => {
