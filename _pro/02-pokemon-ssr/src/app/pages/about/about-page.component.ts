@@ -13,7 +13,7 @@ export default class AboutPageComponent implements OnInit {
   ngOnInit(): void {
     this.title.setTitle('About Page');
     this.meta.updateTag({
-      name: 'descritpion',
+      name: 'description',
       content: 'Mi About Page',
     });
     this.meta.updateTag({ name: 'og:title', content: 'About Page' });
