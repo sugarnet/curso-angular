@@ -4,9 +4,7 @@
   publish = "dist/pokemon-ssr/browser"
   command = "npm run build"
 
-[functions]
-  # Esto ayuda a veces a ubicar las funciones generadas
-  directory = "_pro/02-pokemon-ssr/.netlify/functions-internal"
-
-[[plugins]]
-  package = "@netlify/angular-runtime"
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
