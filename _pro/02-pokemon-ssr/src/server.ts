@@ -11,7 +11,7 @@ export async function netlifyCommonEngineHandler(
   if (url.pathname === '/') {
     return new Response(null, {
       status: 302,
-      headers: { Location: '/pokemon-ssr/about' },
+      headers: { Location: '/pokemons' },
     });
   }
   return await render(commonEngine);
