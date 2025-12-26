@@ -3,3 +3,8 @@
   base = "_pro/02-pokemon-ssr"
   publish = "dist/pokemon-ssr/browser"
   command = "npm run build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
