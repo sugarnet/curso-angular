@@ -44,5 +44,6 @@
       "suffix": "component",
       "fileNameSuffix": ".component"
     }
-  }
+  },
+  "css.lint.unknownAtRules": "ignore"
 }
