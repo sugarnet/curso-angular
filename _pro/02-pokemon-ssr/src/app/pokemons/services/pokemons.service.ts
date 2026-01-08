@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
 import { SimplePokemon } from '../interfaces/simple-pokemon.interface';
 import { PokemonsResponseAPI } from '../interfaces/pokemons-response-api.interface';
+import { Pokemon } from '../interfaces/pokemon.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -23,11 +24,14 @@ export class PokemonsService {
         map((resp) => {
           const simplePokemons: SimplePokemon[] = resp.results.map((pokemon) => ({
             id: pokemon.url.split('/').at(-2) ?? '',
-            name: pokemon.url,
+            name: pokemon.name,
           }));
           return simplePokemons;
-        }),
-        tap(console.log)
+        })
+        // tap(console.log)
       );
+  }
+  public loadPokemon(id: string): Observable<Pokemon> {
+    return this.http.get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${id}`);
   }
 }
