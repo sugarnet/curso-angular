@@ -9,5 +9,5 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
   styleUrl: './app.css',
 })
 export class App {
-  protected readonly title = signal('pokemon-ssr');
+  public readonly title = signal('pokemon-ssr');
 }
