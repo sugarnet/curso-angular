@@ -3,5 +3,47 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "dss-side-menu": {
+      "projectType": "library",
+      "root": "projects/dss-side-menu",
+      "sourceRoot": "projects/dss-side-menu/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/dss-side-menu/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/dss-side-menu/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/dss-side-menu/tsconfig.spec.json",
+            "browsers": ["chromium"]
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/dss-side-menu/**/*.ts",
+              "projects/dss-side-menu/**/*.html"
+            ],
+            "eslintConfig": "projects/dss-side-menu/eslint.config.js"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "schematicCollections": [
+      "angular-eslint"
+    ]
   }
 }
