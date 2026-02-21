@@ -1,0 +1,14 @@
+<h1 class="text-3xl font-bold underline">Hola Mundo!</h1>
+
+<p>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae autem possimus adipisci sunt omnis
+  illum! Omnis sunt voluptates consequatur similique, sapiente blanditiis itaque porro eligendi
+  nihil. Incidunt qui placeat voluptatem.
+</p>
+
+<lib-dss-side-menu
+  [isAuthenticated]="isAuthenticated()"
+  [titleColor]="TitleColor.purple"
+  (onSignIn)="isAuthenticated.set(true)"
+  (onSignOut)="isAuthenticated.set(false)"
+/>

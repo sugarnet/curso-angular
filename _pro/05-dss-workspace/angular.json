@@ -25,7 +25,9 @@
           "builder": "@angular/build:unit-test",
           "options": {
             "tsConfig": "projects/dss-side-menu/tsconfig.spec.json",
-            "browsers": ["chromium"]
+            "browsers": [
+              "chromium"
+            ]
           }
         },
         "lint": {
@@ -36,6 +38,79 @@
               "projects/dss-side-menu/**/*.html"
             ],
             "eslintConfig": "projects/dss-side-menu/eslint.config.js"
+          }
+        }
+      }
+    },
+    "dss-testbed-app": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/dss-testbed-app",
+      "sourceRoot": "projects/dss-testbed-app/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/dss-testbed-app/src/main.ts",
+            "tsConfig": "projects/dss-testbed-app/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/dss-testbed-app/public"
+              }
+            ],
+            "styles": [
+              "projects/dss-testbed-app/src/styles.css"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "dss-testbed-app:build:production"
+            },
+            "development": {
+              "buildTarget": "dss-testbed-app:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/dss-testbed-app/**/*.ts",
+              "projects/dss-testbed-app/**/*.html"
+            ],
+            "eslintConfig": "projects/dss-testbed-app/eslint.config.js"
           }
         }
       }

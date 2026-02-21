@@ -1,6 +1,18 @@
 {
   "name": "dss-side-menu",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "diego",
+    "dss"
+  ],
+  "author": {
+    "name": "Diego Scifo",
+    "email": "diegoscifo@yahoo.com.ar"
+  },
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^21.1.0",
     "@angular/core": "^21.1.0"
