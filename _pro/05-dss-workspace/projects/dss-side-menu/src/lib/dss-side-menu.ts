@@ -17,6 +17,9 @@ export enum TitleColor {
 export class DssSideMenu {
   isAuthenticated = input(false);
 
+  title = input<string>('DSS');
+  subTitle = input<string>('Corp');
+
   titleColor = input<TitleColor>(TitleColor.blue);
 
   onSignOut = output();
