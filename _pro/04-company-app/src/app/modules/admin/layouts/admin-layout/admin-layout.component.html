@@ -1,15 +1,12 @@
 <!-- component -->
 <div class="min-h-screen bg-gray-50/50">
-  <!-- <app-side-menu
-    [isAuthenticated]="isAuthenticated()"
-    (onSignIn)="onLogin()"
-    (onSignOut)="onLogout()"
-  ></app-side-menu> -->
   <lib-dss-side-menu
     [isAuthenticated]="isAuthenticated()"
     (onSignIn)="onLogin()"
     (onSignOut)="onLogout()"
-    [titleColor]="TitleColor.purple"
+    [titleColor]="TitleColor.green"
+    title="Diego"
+    subTitle="Scifo"
   />
   <div class="p-4 xl:ml-80">
     <nav
