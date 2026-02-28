@@ -15,8 +15,9 @@ export class App {
   cookie = inject(SsrCookieService);
   languageService = inject(LanguageService);
 
-  cookieLogEffect = effect(() => {
-    console.log({ cookie: this.cookie.get('lang') });
-    this.languageService.changeLang(this.cookie.get('lang'));
-  });
+  constructor() {
+    const lang = this.cookie.check('lang') ? this.cookie.get('lang') : 'en';
+
+    this.languageService.changeLang(lang);
+  }
 }

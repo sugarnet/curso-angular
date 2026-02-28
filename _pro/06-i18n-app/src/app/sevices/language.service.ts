@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable, InjectionToken, signal } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { SsrCookieService } from 'ngx-cookie-service-ssr';
 
@@ -7,12 +7,14 @@ import { SsrCookieService } from 'ngx-cookie-service-ssr';
 })
 export class LanguageService {
   cookie = inject(SsrCookieService);
-  translate = inject(TranslateService);
+  translateService = inject(TranslateService);
   currentLang = signal('');
 
   changeLang(lang: string) {
     this.cookie.set('lang', lang);
-    //this.translate.setFallbackLang(lang);
+
+    this.translateService.setFallbackLang(lang);
+    this.translateService.use(lang);
 
     this.currentLang.set(lang);
   }

@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { LanguageService } from '../../sevices/language.service';
 import { sign } from 'crypto';
+import { TranslateDirective, TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-language-selector',
-  imports: [],
+  imports: [TranslateDirective, TranslateModule],
   templateUrl: './language-selector.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -18,7 +19,7 @@ export class LanguageSelectorComponent {
     { code: 'it', flag: '🇮🇹' },
   ]);
 
-  currentLang = signal(this.languageService.currentLang);
+  currentLang = this.languageService.currentLang;
 
   changeLanguage(event: Event) {
     const target = event.target as HTMLSelectElement;
